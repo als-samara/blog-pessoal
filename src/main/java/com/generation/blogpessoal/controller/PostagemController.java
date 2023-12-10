@@ -27,7 +27,6 @@ public class PostagemController {
 		return ResponseEntity.ok(postagemRepository.findAll());
 		
 		// SELECT * FROM tb_postagens;
-		
 	}
 	
 	@GetMapping("/{id}")
@@ -37,5 +36,9 @@ public class PostagemController {
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
+	@GetMapping("/titulo/{titulo}")
+	public ResponseEntity<List<Postagem>> getByTitulo(@PathVariable String titulo){
+		return ResponseEntity.ok(postagemRepository.findAllByTituloContainingIgnoreCase(titulo));
+	}
 	
 }
