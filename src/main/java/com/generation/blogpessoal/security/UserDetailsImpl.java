@@ -1,5 +1,6 @@
 package com.generation.blogpessoal.security;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -20,5 +21,43 @@ public class UserDetailsImpl implements UserDetails {
 		this.passWord = user.getSenha();
 	}
 	
-	public UserDetailsImpl() { } 
+	public UserDetailsImpl() { }
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+
+		return passWord;
+	}
+
+	@Override
+	public String getUsername() {
+
+		return userName;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }
