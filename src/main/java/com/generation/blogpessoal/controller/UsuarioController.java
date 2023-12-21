@@ -47,6 +47,13 @@ public class UsuarioController {
 			.orElse(ResponseEntity.notFound().build());
 	}
 	
+	@GetMapping("/usuario/{usuario}")
+	public ResponseEntity<Usuario> getByUsuario(@PathVariable String usuario) {
+		return usuarioRepository.findByUsuario(usuario)
+			.map(resposta -> ResponseEntity.ok(resposta))
+			.orElse(ResponseEntity.notFound().build());
+	}
+	
 	@PostMapping("/logar")
 	public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin){
 		
