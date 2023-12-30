@@ -90,18 +90,24 @@ public class UsuarioControllerTest {
 	@Test
 	@DisplayName("Atualizar um Usuário")
 	public void deveAtualizarUmUsuario() {
-
+		
+		// Optional para armazenar o objeto persistido no DB
 		Optional<Usuario> usuarioCadastrado = usuarioService.cadastrarUsuario(
 				new Usuario(0L, "Juliana Andrews", "juliana_andrews@email.com.br", "juliana123", "-"));
-
+		
+		// objeto que será usado para atualizar o usuário criado acima
 		Usuario usuarioUpdate = new Usuario(usuarioCadastrado.get().getId(), "Juliana Andrews Ramos",
 				"juliana_ramos@email.com.br", "juliana123", "-");
-
+		
+		// A requisição recebe o usuarioUpdate, que tem seus atributos transformados em um objeto Usuario a ser enviado no corpo da requisição
 		HttpEntity<Usuario> corpoRequisicao = new HttpEntity<Usuario>(usuarioUpdate);
-
+		
+		// A requisição é enviada com os 4 atributos necessários e a resposta armzenada na variável corpoResposta
+		// .withBasicAuth é usado para autenticar o usuário root criado no teste start()
 		ResponseEntity<Usuario> corpoResposta = testRestTemplate.withBasicAuth("root@root.com", "rootroot")
 				.exchange("/usuarios/atualizar", HttpMethod.PUT, corpoRequisicao, Usuario.class);
-
+		
+		// Espera um HttpStatus ok(200) no corpoResposta.
 		assertEquals(HttpStatus.OK, corpoResposta.getStatusCode());
 
 	}
@@ -109,16 +115,21 @@ public class UsuarioControllerTest {
 	@Test
 	@DisplayName("Listar todos os Usuários")
 	public void deveMostrarTodosUsuarios() {
-
+		
+		// persiste 2 Usuarios no DB, através do Método de cadastrar da UsuarioService
 		usuarioService.cadastrarUsuario(
 				new Usuario(0L, "Sabrina Sanches", "sabrina_sanches@email.com.br", "sabrina123", "-"));
 
 		usuarioService.cadastrarUsuario(
 				new Usuario(0L, "Ricardo Marques", "ricardo_marques@email.com.br", "ricardo123", "-"));
-
+		
+		//  como o Blog Pessoal está com o Spring Security habilitado com autenticação do tipo Http Basic, o Objeto testRestTemplate dos endpoints que exigem autenticação, deverá efetuar o login com um usuário e uma senha válida para realizar os testes
+		// .withBasicAuth autentica o usuário root criado no test start()
+		// o método exchange recebe o endpoint, o tipo de método(get), corpo de requisição nulo (por ser um método get) e o tipo de dado que queremos retornar
 		ResponseEntity<String> resposta = testRestTemplate.withBasicAuth("root@root.com", "rootroot")
 				.exchange("/usuarios/all", HttpMethod.GET, null, String.class);
-
+		
+		// Espera um HttpStatus ok(200) na resposta.
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 
 	}
