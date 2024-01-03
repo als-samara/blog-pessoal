@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -42,7 +42,7 @@ public class UsuarioControllerTest {
 
 	// apaga todos os dados da tabela e cria o usuário root@root.com para testar os
 	// Métodos protegidos por autenticação
-	@BeforeAll
+	@BeforeEach
 	void start() {
 
 		usuarioRepository.deleteAll();
