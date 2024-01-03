@@ -133,5 +133,20 @@ public class UsuarioControllerTest {
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 
 	}
+	
+	@Test
+	@DisplayName("Listar Usuário por Id")
+	public void deveMostrarUsuarioPeloIdFornecido() {
+		
+		Usuario mimi = new Usuario(0L, "Mimi Almeida", "mimi@email.com.br", "mimi123", "-");
+		usuarioService.cadastrarUsuario(mimi);
+		
+		ResponseEntity<Usuario> resposta = testRestTemplate.withBasicAuth("root@root.com", "rootroot")
+				.exchange("/usuarios/{id}", HttpMethod.GET, null, Usuario.class, mimi.getId());
+		
+		// Espera um HttpStatus ok(200) na resposta.
+		assertEquals(HttpStatus.OK, resposta.getStatusCode());
+
+	}
 
 }
