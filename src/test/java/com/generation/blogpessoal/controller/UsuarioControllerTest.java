@@ -1,6 +1,7 @@
 package com.generation.blogpessoal.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.generation.blogpessoal.model.Usuario;
+import com.generation.blogpessoal.model.UsuarioLogin;
 import com.generation.blogpessoal.repository.UsuarioRepository;
 import com.generation.blogpessoal.service.UsuarioService;
 
@@ -148,5 +150,38 @@ public class UsuarioControllerTest {
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 
 	}
+
+	@Test
+	@DisplayName("Autenticar Usuário")
+	public void deveAutenticarUmUsuario() {
+	    // Criando um usuário para teste
+	    Usuario mimi = new Usuario(0L, "Mimi Almeida", "mimi@email.com.br", "mimi1234", "-");
+	    usuarioService.cadastrarUsuario(mimi);
+
+	    // Configurando as credenciais para autenticação
+	    String username = "mimi@email.com.br";
+	    String password = "mimi1234";
+
+	    // Criando o objeto de requisição com as credenciais
+	    UsuarioLogin usuarioLogin = new UsuarioLogin();
+	    usuarioLogin.setUsuario(username);
+	    usuarioLogin.setSenha(password);
+
+	    HttpEntity<UsuarioLogin> requestBody = new HttpEntity<>(usuarioLogin);
+
+	    // Enviando a requisição para autenticação
+	    ResponseEntity<UsuarioLogin> corpoResposta = testRestTemplate.exchange(
+	            "/usuarios/logar",
+	            HttpMethod.POST,
+	            requestBody,
+	            UsuarioLogin.class
+	    );
+
+	    assertEquals(HttpStatus.OK, corpoResposta.getStatusCode());
+	    assertNotNull(corpoResposta.getBody());
+	  
+	}
+
+
 
 }
