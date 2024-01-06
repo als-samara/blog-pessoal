@@ -29,8 +29,8 @@ Sinta-se à vontade para incluir novas features que achar interessante. Se você
 5. Abra um Pull Request
 
 ## Deploy
-Visualize o Deploy do Back-End pelo link: https://blogpessoal-6bdj.onrender.com/
-usuario: root@root.com
+Visualize o Deploy do Back-End pelo link: https://blogpessoal-6bdj.onrender.com/ <br>
+usuario: root@root.com <br>
 senha: rootroot
 
 ## Contato
