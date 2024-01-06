@@ -28,9 +28,15 @@ Sinta-se à vontade para incluir novas features que achar interessante. Se você
 4. Faça push para a branch (`git push origin feature/nova-feature`)
 5. Abra um Pull Request
 
+## Deploy
+Visualize o Deploy do Back-End pelo link: https://blogpessoal-6bdj.onrender.com/
+usuario: root@root.com
+senha: rootroot
+
 ## Contato
 
-Para dúvidas ou sugestões, entre em contato pelo email: 
+Para dúvidas ou sugestões, entre em contato comigo: 
 
-samaraalmeida379@gmail.com <br>
+[![Me envie um e-mail](https://img.shields.io/badge/Email-samaraalmeida379@gmail.com-red)](mailto:samaraalmeida379@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Me_envie_uma_mensagem!-blue)](https://www.linkedin.com/in/samara-almeida-als/)
 
