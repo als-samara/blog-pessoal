@@ -72,6 +72,17 @@ public class UsuarioController {
 
 	}
 
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.OPTIONS)
+    	public ResponseEntity<?> handleOptionsRequest() {
+        // Responda com os cabeçalhos CORS apropriados
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "http://localhost:5173");
+        headers.add("Access-Control-Allow-Methods", "POST");
+        headers.add("Access-Control-Allow-Headers", "Content-Type");
+
+        return new ResponseEntity<>(headers, HttpStatus.OK);
+    	}
+
 	@PutMapping("/atualizar")
 	public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario usuario) {
 		
