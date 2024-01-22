@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.generation.blogpessoal.model.UsuarioLogin;
 import com.generation.blogpessoal.model.Usuario;
+import com.generation.blogpessoal.model.UsuarioLogin;
 import com.generation.blogpessoal.repository.UsuarioRepository;
 import com.generation.blogpessoal.service.UsuarioService;
 
@@ -71,17 +71,6 @@ public class UsuarioController {
 			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 
 	}
-
-	@RequestMapping(value = "/cadastrar", method = RequestMethod.OPTIONS)
-    	public ResponseEntity<?> handleOptionsRequest() {
-        // Responda com os cabeçalhos CORS apropriados
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin", "http://localhost:5173");
-        headers.add("Access-Control-Allow-Methods", "POST");
-        headers.add("Access-Control-Allow-Headers", "Content-Type");
-
-        return new ResponseEntity<>(headers, HttpStatus.OK);
-    	}
 
 	@PutMapping("/atualizar")
 	public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario usuario) {
